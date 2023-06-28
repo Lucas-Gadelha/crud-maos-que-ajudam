@@ -3,10 +3,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+require("./db/mongo.connection")
+
 var users = require('./routes/users');
-var Usuarios = require("./routes/usuarios")
+var usuarios = require("./routes/usuarios")
 
 var app = express();
+
+const cors = require('cors');
+
+// Habilitando o CORS
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,7 +27,7 @@ app.use(function (req, res, next) {
   })
 
 app.use('/api/v1/users', users);
-app.use('/usuario/', Usuarios);
+app.use('/usuario/', usuarios);
 
 
 module.exports = app;
